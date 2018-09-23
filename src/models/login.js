@@ -36,42 +36,11 @@ export default {
         role: 0
       },
     ],
-    user: {
-      uid: 80,
-      avatar: '/api/avatar/test.jpg',
-      stuid: 2015213740,
-      name: '邢力',
-      depart: 3,
-      role: 2
-    },
-    feedbackType: [
-      { key: '0', text: '吐槽' },
-      { key: '1', text: 'Bug' },
-      { key: '2', text: '脑洞大开' }],
-    memberStatus: [
-      { key: '0', text: '未知', value: '未知' },
-      { key: '1', text: '正常', value: '正常' },
-      { key: '2', text: '离职', value: '离职' },
-      { key: '3', text: '黑名单', value: '黑名单' }],
-    memberRole: [
-      { key: '0', text: '成员', value: '成员' },
-      { key: '1', text: '部长', value: '部长' },
-      { key: '2', text: '行政', value: '行政' },
-      { key: '3', text: '总监/主管', value: '总监/主管' }],
-    campus: [
-      { text: '屯溪路校区', value: '屯溪路校区', key: '0', },
-      { text: '翡翠湖校区', value: '翡翠湖校区', key: '0', }],
-    departs: [
-      { text: '明理四美', value: '明理四美', key: '0' },
-      { text: '办公室', value: '办公室', key: '1' },
-      { text: '推广部', value: '推广部', key: '2' },
-      { text: '技术部', value: '技术部', key: '3' },
-      { text: '视觉设计部', value: '视觉设计部', key: '4' },
-      { text: '产品部', value: '产品部', key: '5' },
-      { text: '视频部', value: '视频部', key: '6' },
-      { text: '编辑部', value: '编辑部', key: '7' },
-      { text: '微信微博部', value: '微信微博部', key: '8' },
-      { text: '策划部', value: '策划部', key: '9' }],
+    user: {},
+    feedbackType: [],
+    campus: [],
+    departs: [],
+    memberStatus: [],
     recruitStatus: [
       { key: 0, value: '回绝' },
       { key: 1, value: '一面中' },
@@ -88,19 +57,19 @@ export default {
   },
 
   effects: {
-    *login({ payload }, { call, }) {
+    *login({ payload }, { call, put }) {
       let res = yield call(login.login, payload);
       return res
     },
-    *logout({ payload }, { call, }) {
-      console.log('++++++++');
-
+    *logout({ payload }, { call }) {
       let res = yield call(login.logout);
       return res
     },
-    *getUser({ payload }, { call, }) {
+    *getUser({ payload }, { call, put }) {
       let res = yield call(login.getUser);
-      console.log(res)
+      if (res.success) {
+        yield put({ type: 'setData', payload: res.data })
+      }
       return res
     },
   },
@@ -109,6 +78,17 @@ export default {
     showLoading(state) {
       return { ...state, loginLoading: true };
     },
+    setData(state, { payload }) {
+      return {
+        ...state,
+        user: payload[0],
+        campus: payload[1].campus,
+        departs: payload[1].departs,
+        feedbackType: payload[1].feedbackType,
+        memberRole: payload[1].memberRole,
+        memberStatus: payload[1].memberStatus,
+      };
+    }
   },
 
 };

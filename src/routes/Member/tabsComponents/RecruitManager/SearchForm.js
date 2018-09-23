@@ -52,7 +52,7 @@ class SearchForm extends React.Component {
                   >
                     <Option value="">all</Option>
                     {this.props.campus.map(item => (
-                      <Option value={item.value} key={item.key}>{item.text}</Option>
+                      <Option value={item.value} key={item.key}>{item.value}</Option>
                     ))}
                   </Select>
                 </Col>
@@ -73,7 +73,7 @@ class SearchForm extends React.Component {
                   >
                     <Option value="">all</Option>
                     {this.props.departs.map(item => (
-                      <Option value={item.value} key={item.key}>{item.text}</Option>
+                      <Option value={item.value} key={item.key}>{item.value}</Option>
                     ))}
                   </Select>
                 </Col>

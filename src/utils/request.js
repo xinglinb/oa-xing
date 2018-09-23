@@ -30,8 +30,16 @@ export function request(url, options) {
     .then(checkStatus)
     .then(parseJSON)
     .then(data => {
+      if (data.status) {
+        message.error(data.message)
+      }
       if (!data.success) {
-        message.error(data.data)
+        message.error(data.msg.text)
+        if (!data.msg.login) {
+          cookie.clearCookie()
+          routerRedux.push('/login')
+        }
+
       }
       return data
     })

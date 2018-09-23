@@ -101,7 +101,7 @@ const MemberForm = Form.create()(
             })(
               <Select style={{ width: '100%' }}>
                 {this.props.memberStatus.map(item => (
-                  <Option key={item.key} value={item.value}>{item.text}</Option>
+                  <Option key={item.key} value={item.value}>{item.value}</Option>
                 ))}
               </Select>
             )}
@@ -114,7 +114,7 @@ const MemberForm = Form.create()(
                 })(
                   <Select style={{ width: '100%' }} disabled={role < 2}>
                     {this.props.departs.map(item => (
-                      <Option key={item.key} value={item.value}>{item.text}</Option>
+                      <Option key={item.key} value={item.value}>{item.value}</Option>
                     ))}
                   </Select>
                 )}
@@ -127,7 +127,7 @@ const MemberForm = Form.create()(
                 })(
                   <Select style={{ width: '100%' }}>
                     {this.props.memberRole.map(item => (
-                      <Option key={item.key} disabled={Number(item.key) > role} value={item.value}>{item.text}</Option>
+                      <Option key={item.key} disabled={Number(item.key) > role} value={item.value}>{item.value}</Option>
                     ))}
                   </Select>
                 )}
@@ -140,7 +140,7 @@ const MemberForm = Form.create()(
             })(
               <Select style={{ width: '100%' }}>
                 {this.props.campus.map(item => (
-                  <Option key={item.key} value={item.value}>{item.text}</Option>
+                  <Option key={item.key} value={item.value}>{item.value}</Option>
                 ))}
               </Select>
             )}

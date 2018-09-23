@@ -5,7 +5,7 @@ export function login(params) {
 }
 
 export function logout() {
-  return post(`/api/logout`)
+  return request(`/api/logout`)
 }
 
 export function getUser() {

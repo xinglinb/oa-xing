@@ -4,7 +4,7 @@
   ],
   "proxy": {
     "/api": {
-      "target": "https://oa.hfutonline.net/",
+      "target": "http://snwvgz.natappfree.cc/",
       "changeOrigin": true
     }
   }
