@@ -1,7 +1,6 @@
 import fetch from 'dva/fetch';
 import queryString from 'query-string';
 import { message } from "antd";
-import { routerRedux } from 'dva/router';
 import cookie from "./cookie";
 
 function parseJSON(response) {
@@ -37,7 +36,7 @@ export function request(url, options) {
         message.error(data.msg.text)
         if (!data.msg.login) {
           cookie.clearCookie()
-          routerRedux.push('/login')
+          document.location.replace("#/login");
         }
 
       }
