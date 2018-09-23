@@ -2,13 +2,8 @@ import React from 'react';
 import styles from './layout.less';
 import { Layout, Menu, Icon, Avatar, Dropdown, Modal } from 'antd';
 import { connect } from 'dva';
-import { Switch, Route } from 'dva/router';
 import Nav from "./components/Nav";
-import Member from './../../routes/Member'
-import Home from '../../routes/Home'
-import Report from '../../routes/Report'
-import FeedBack from '../../routes/FeedBack'
-import Setting from '../../routes/Setting'
+import Routes from "./components/Routes";
 import cookie from "./../../utils/cookie";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -87,13 +82,7 @@ class MyLayout extends React.Component {
           </Header>
           <Content style={{ marginTop: 10 }}>
             <div style={{ background: '#fff' }}>
-              <Switch>
-                <Route exact path={`${this.props.match.url}`} component={Home} />
-                <Route path={`${this.props.match.url}member`} component={Member} />
-                <Route path={`${this.props.match.url}feedback`} component={FeedBack} />
-                <Route path={`${this.props.match.url}report`} component={Report} />
-                <Route path={`${this.props.match.url}setting`} component={Setting} />
-              </Switch>
+              <Routes indexUrl={this.props.match.url} role={this.props.user.role} />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
@@ -106,5 +95,6 @@ class MyLayout extends React.Component {
 }
 
 export default connect(({ login }) => ({
-  loginLoading: login.loginLoading
+  loginLoading: login.loginLoading,
+  user: login.user
 }))(MyLayout);

@@ -8,27 +8,32 @@ export default {
       {
         url: '/',
         icon: 'home',
-        name: '首页'
+        name: '首页',
+        role: 0
       },
       {
         url: '/member',
         icon: 'user',
-        name: '成员'
+        name: '成员',
+        role: 1
       },
       {
         url: '/report',
         icon: 'copy',
-        name: '汇报'
+        name: '汇报',
+        role: 0
       },
       {
         url: '/feedback',
         icon: 'edit',
-        name: '反馈'
+        name: '反馈',
+        role: 1
       },
       {
         url: '/setting',
         icon: 'setting',
-        name: '设置'
+        name: '设置',
+        role: 0
       },
     ],
     user: {
@@ -37,7 +42,7 @@ export default {
       stuid: 2015213740,
       name: '邢力',
       depart: 3,
-      role: 3
+      role: 1
     },
     feedbackType: [
       { key: '0', text: '吐槽' },

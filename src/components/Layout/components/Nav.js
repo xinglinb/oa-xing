@@ -39,20 +39,21 @@ class Nav extends React.Component {
     })
   }
   render() {
-    const { nav, actMenu } = this.props
+    const { nav, actMenu, user } = this.props
     return (
       <div style={{ height: '100%', position: "relative", minHeight: 450 }}>
         <div className={styles.logos} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[actMenu]}>
           {
-            nav.map(item => (
-              <Menu.Item key={item.url}>
-                <Link to={item.url}>
-                  <Icon type={item.icon} />
-                  <span>{item.name}</span>
-                </Link>
-              </Menu.Item>
-            ))
+            nav.filter(item => item.role <= user.role)
+              .map(item => (
+                <Menu.Item key={item.url}>
+                  <Link to={item.url}>
+                    <Icon type={item.icon} />
+                    <span>{item.name}</span>
+                  </Link>
+                </Menu.Item>
+              ))
           }
         </Menu>
         <Icon type="message" theme="outlined" className={styles.message} onClick={this.showModel} />
@@ -76,5 +77,6 @@ Nav.propTypes = {
 };
 
 export default connect(({ login }) => ({
-  nav: login.nav
+  nav: login.nav,
+  user: login.user
 }))(Nav);

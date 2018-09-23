@@ -10,6 +10,7 @@ class FeedBack extends React.Component {
       {
         key: 'one',
         tab: '所有反馈',
+        role: 1
       }
     ],
     contentList: {
@@ -20,7 +21,7 @@ class FeedBack extends React.Component {
     return (
       <Card
         style={{ width: '100%' }}
-        tabList={this.state.tabListTitle}
+        tabList={this.state.tabListTitle.filter(item => item.role <= this.props.user.role)}
         activeTabKey={this.state.titleKey}
         onTabChange={(key) => { this.setState({ titleKey: key }) }}
       >
@@ -34,6 +35,6 @@ class FeedBack extends React.Component {
 FeedBack.propTypes = {
 };
 
-export default connect(({ home }) => ({
-
+export default connect(({ login }) => ({
+  user: login.user
 }))(FeedBack);

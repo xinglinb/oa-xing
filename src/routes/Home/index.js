@@ -11,10 +11,12 @@ class Home extends React.Component {
       {
         key: 'one',
         tab: '通知公告',
+        role: 0
       },
       {
         key: 'two',
         tab: '发通知',
+        role: 2
       }
     ],
     contentList: {
@@ -26,7 +28,7 @@ class Home extends React.Component {
     return (
       <Card
         style={{ width: '100%' }}
-        tabList={this.state.tabListTitle}
+        tabList={this.state.tabListTitle.filter(item => item.role <= this.props.user.role)}
         activeTabKey={this.state.titleKey}
         onTabChange={(key) => { this.setState({ titleKey: key }) }}
       >
@@ -40,6 +42,6 @@ class Home extends React.Component {
 Home.propTypes = {
 };
 
-export default connect(({ home }) => ({
-
+export default connect(({ login }) => ({
+  user: login.user
 }))(Home);

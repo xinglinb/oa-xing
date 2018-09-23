@@ -4,17 +4,19 @@ import { Card } from 'antd';
 import MemberManager from "./tabsComponents/MemberManager/";
 import RecruitManager from "./tabsComponents/RecruitManager/";
 
-class Home extends React.Component {
+class Member extends React.Component {
   state = {
     titleKey: 'one',
     tabListTitle: [
       {
         key: 'one',
         tab: '成员管理',
+        role: 1
       },
       {
         key: 'two',
         tab: '招新管理',
+        role: 1
       },
     ],
     contentList: {
@@ -26,7 +28,7 @@ class Home extends React.Component {
     return (
       <Card
         style={{ width: '100%' }}
-        tabList={this.state.tabListTitle}
+        tabList={this.state.tabListTitle.filter(item => item.role <= this.props.user.role)}
         activeTabKey={this.state.titleKey}
         onTabChange={(key) => { this.setState({ titleKey: key }) }}
       >
@@ -36,6 +38,6 @@ class Home extends React.Component {
   }
 }
 
-export default connect(({ home }) => ({
-
-}))(Home);
+export default connect(({ login }) => ({
+  user: login.user
+}))(Member);
