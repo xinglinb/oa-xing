@@ -16,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 class MyLayout extends React.Component {
   componentDidMount() {
-    this.props.dispatch({ type: 'login/getUser' })
+    // this.props.dispatch({ type: 'login/getUser' })
   }
   state = {
     collapsed: false
@@ -67,14 +67,9 @@ class MyLayout extends React.Component {
                     okType: 'danger',
                     onOk() {
                       return new Promise((resolve, reject) => {
-                        props.dispatch({ type: 'login/logout' })
-                          .then(res => {
-                            if (res.success) {
-                              resolve()
-                              props.history.push('/login')
-                              cookie.clearCookie()
-                            }
-                          })
+                        resolve()
+                        props.history.push('/login')
+                        cookie.clearCookie()
                       })
                         .catch((e) => console.log(e));
                     },

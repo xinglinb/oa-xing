@@ -24,11 +24,12 @@ class Login extends React.Component {
                 type: 'login/login',
                 payload: {
                   ...values,
-                  password: md5(values.password)
+                  pwd: md5(values.pwd)
                 }
               }).then(res => {
                 if (res.success) {
-                  cookie.setCookie('hasLogin', 1, 1 / 12)
+                  cookie.setCookie('hasLogin', 1, res.data.expires / 24)
+                  cookie.setCookie(res.data.tokenName, res.data.token, res.data.expires / 24)
                   history.push('/')
                 } else {
                   this.setState({ loginLoading: false })
@@ -53,7 +54,7 @@ class Login extends React.Component {
                 )}
               </FormItem>
               <FormItem>
-                {getFieldDecorator('password', {
+                {getFieldDecorator('pwd', {
                   rules: [{ required: true, message: '请输入你的密码！' }],
                 })(
                   <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
