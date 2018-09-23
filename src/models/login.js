@@ -42,7 +42,7 @@ export default {
       stuid: 2015213740,
       name: '邢力',
       depart: 3,
-      role: 1
+      role: 2
     },
     feedbackType: [
       { key: '0', text: '吐槽' },

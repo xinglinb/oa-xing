@@ -11,7 +11,8 @@ export default {
     actRecruit: {},
     searchFrom: {
       depart: '',
-      campus: ''
+      campus: '',
+      content: ''
     }
   },
 

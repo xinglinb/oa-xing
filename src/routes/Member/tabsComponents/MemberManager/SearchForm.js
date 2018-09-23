@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Row, Col, Button, Input, Select } from 'antd';
+import styles from '../../../../assets/index.less';
 
 const Option = Select.Option;
 
@@ -18,79 +19,99 @@ class SearchForm extends React.Component {
     })
   }
   render() {
+    const { user: { role } } = this.props
+    const beforeCol = {
+      xl: 4, sm: 5, xs: 24
+    }
+    const endCol = {
+      xl: { span: 6, offset: role >= 2 ? 4 : 16 },
+      sm: { span: 6, offset: role >= 2 ? 0 : 15 },
+      xs: { span: 24, offset: 0 }
+    }
+    const buttonCol = {
+      xl: { span: 2, offset: 0 },
+      sm: { span: 2, offset: 1 },
+      xs: { span: 24, offset: 0 }
+    }
     return (
       <Row style={{ marginTop: -8 }}>
-        <Col xl={4} sm={5} xs={24} style={{ marginBottom: 15 }}>
-          <Row>
-            <Col span={6} style={{ textAlign: 'right', height: 32, lineHeight: '32px' }}>
-              届别：
+        {
+          role >= 2 && [
+            <Col key={0} {...beforeCol} className={styles.searchCol}>
+              <Row>
+                <Col span={6} className={styles.searchColText}>
+                  届别：
               </Col>
-            <Col span={18}>
-              <Select
-                value={this.props.searchFrom.period}
-                style={{ width: '100%' }}
-                onChange={value => {
-                  this.updateSelect('period', value)
-                }}
-              >
-                <Option value={13}>第13届</Option>
-              </Select>
-            </Col>
-          </Row>
-        </Col>
-        <Col xl={4} sm={5} xs={24} style={{ marginBottom: 15 }}>
-          <Row>
-            <Col span={6} style={{ textAlign: 'right', height: 32, lineHeight: '32px' }}>
-              校区：
+                <Col span={18}>
+                  <Select
+                    value={this.props.searchFrom.period}
+                    style={{ width: '100%' }}
+                    onChange={value => {
+                      this.updateSelect('period', value)
+                    }}
+                  >
+                    <Option value={13}>第13届</Option>
+                  </Select>
+                </Col>
+              </Row>
+            </Col>,
+            <Col key={1} {...beforeCol} className={styles.searchCol}>
+              <Row>
+                <Col span={6} className={styles.searchColText}>
+                  校区：
               </Col>
-            <Col span={18}>
-              <Select
-                value={this.props.searchFrom.campus}
-                style={{ width: '100%' }}
-                onChange={value => {
-                  this.updateSelect('campus', value)
-                }}
-              >
-                <Option value="">all</Option>
-                {this.props.campus.map(item => (
-                  <Option value={item.value} key={item.key}>{item.text}</Option>
-                ))}
-              </Select>
-            </Col>
-          </Row>
-        </Col>
-        <Col xl={4} sm={5} xs={24} style={{ marginBottom: 15 }}>
-          <Row>
-            <Col span={6} style={{ textAlign: 'right', height: 32, lineHeight: '32px' }}>
-              部门：
+                <Col span={18}>
+                  <Select
+                    value={this.props.searchFrom.campus}
+                    style={{ width: '100%' }}
+                    onChange={value => {
+                      this.updateSelect('campus', value)
+                    }}
+                  >
+                    <Option value="">all</Option>
+                    {this.props.campus.map(item => (
+                      <Option value={item.value} key={item.key}>{item.text}</Option>
+                    ))}
+                  </Select>
+                </Col>
+              </Row>
+            </Col>,
+            <Col key={2} {...beforeCol} className={styles.searchCol}>
+              <Row>
+                <Col span={6} className={styles.searchColText}>
+                  部门：
               </Col>
-            <Col span={18}>
-              <Select
-                value={this.props.searchFrom.depart}
-                style={{ width: '100%' }}
-                onChange={value => {
-                  this.updateSelect('depart', value)
-                }}
-              >
-                <Option value="">all</Option>
-                {this.props.departs.map(item => (
-                  <Option value={item.value} key={item.key}>{item.text}</Option>
-                ))}
-              </Select>
+                <Col span={18}>
+                  <Select
+                    value={this.props.searchFrom.depart}
+                    style={{ width: '100%' }}
+                    onChange={value => {
+                      this.updateSelect('depart', value)
+                    }}
+                  >
+                    <Option value="">all</Option>
+                    {this.props.departs.map(item => (
+                      <Option value={item.value} key={item.key}>{item.text}</Option>
+                    ))}
+                  </Select>
+                </Col>
+              </Row>
             </Col>
-          </Row>
-        </Col>
-        <Col xl={{ span: 6, offset: 4 }} sm={{ span: 6, offset: 0 }} xs={{ span: 24, offset: 0 }} style={{ textAlign: 'right', marginBottom: 15 }}>
+          ]
+        }
+        <Col {...endCol} >
           <Row>
-            <Col span={6} style={{ textAlign: 'right', height: 32, lineHeight: '32px' }}>
+            <Col span={6} className={styles.searchColText}>
               筛选：
               </Col>
             <Col span={18}>
-              <Input placeholder="可输入姓名、学号、手机号（回车筛选）" />
+              <Input onPressEnter={e => {
+                this.updateSelect('content', e.target.value)
+              }} placeholder="可输入姓名、学号、手机号（回车筛选）" />
             </Col>
           </Row>
         </Col>
-        <Col xl={{ span: 2, offset: 0 }} sm={{ span: 2, offset: 1 }} xs={24} style={{ marginBottom: 15, textAlign: 'right' }}>
+        <Col {...buttonCol} className={styles.searchColButton}>
           <Button type="primary" onClick={() => {
             this.props.dispatch({ type: 'member/getMemberExcel' })
           }}>导出excel</Button>
@@ -105,6 +126,7 @@ export default connect(({ member, login }) => ({
   searchFrom: member.searchFrom,
   campus: login.campus,
   departs: login.departs,
+  user: login.user,
 }))(SearchForm);
 
 

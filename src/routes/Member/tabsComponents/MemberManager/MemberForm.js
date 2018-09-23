@@ -193,5 +193,6 @@ export default connect(({ member, login }) => ({
   memberStatus: login.memberStatus,
   departs: login.departs,
   memberRole: login.memberRole,
-  campus: login.campus
+  campus: login.campus,
+  user: login.user
 }))(MemberForm);

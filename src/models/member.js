@@ -12,7 +12,8 @@ export default {
     searchFrom: {
       period: 13,
       depart: '',
-      campus: ''
+      campus: '',
+      content: ''
     }
   },
 
