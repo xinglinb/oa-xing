@@ -99,7 +99,7 @@ class SearchForm extends React.Component {
             </Col>
           ]
         }
-        <Col {...endCol} >
+        <Col {...endCol} className={styles.searchCol}>
           <Row>
             <Col span={6} className={styles.searchColText}>
               筛选：

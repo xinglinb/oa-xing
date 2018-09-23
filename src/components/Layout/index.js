@@ -76,8 +76,8 @@ class MyLayout extends React.Component {
               </Menu>
             )} placement="bottomCenter" trigger={['click']}>
               <Avatar className={styles.avatar} size="large">
-                邢力
-            </Avatar>
+                {props.user.name}
+              </Avatar>
             </Dropdown>
           </Header>
           <Content style={{ marginTop: 10 }}>

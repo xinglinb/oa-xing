@@ -19,7 +19,7 @@ const MemberForm = Form.create()(
       })
     }
     render() {
-      const { form: { getFieldDecorator }, actMember } = this.props;
+      const { form: { getFieldDecorator }, actMember, user: { role } } = this.props;
       const twoFormCol = {
         labelCol: {
           xs: { span: 24 },
@@ -112,7 +112,7 @@ const MemberForm = Form.create()(
                 {getFieldDecorator('depart', {
                   initialValue: actMember.depart
                 })(
-                  <Select style={{ width: '100%' }}>
+                  <Select style={{ width: '100%' }} disabled={role < 2}>
                     {this.props.departs.map(item => (
                       <Option key={item.key} value={item.value}>{item.text}</Option>
                     ))}
@@ -127,7 +127,7 @@ const MemberForm = Form.create()(
                 })(
                   <Select style={{ width: '100%' }}>
                     {this.props.memberRole.map(item => (
-                      <Option key={item.key} value={item.value}>{item.text}</Option>
+                      <Option key={item.key} disabled={Number(item.key) > role} value={item.value}>{item.text}</Option>
                     ))}
                   </Select>
                 )}

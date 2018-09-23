@@ -53,13 +53,11 @@ const WriteForm = Form.create()(
           <FormItem label="工作陈述" {...FormCol}>
             {getFieldDecorator('content', {
               rules: [
-                { required: true, message: '别忘了填啊！' },
+                { required: true, message: '这个月一点事都没干可不行哦' },
               ],
             })(
               <TextArea
-                placeholder='本月工作内容，请简明分点陈述，格式如下
-                              １、参与XXX项目，完成了首页和Logo设计
-                            ２、参与XXX项目，完成前端技术实现'
+                placeholder={'本月工作内容，请简明分点陈述，格式如下 \n １、参与XXX项目，完成了首页和Logo设计 \n２、参与XXX项目，完成前端技术实现'}
                 autosize={{ minRows: 6, maxRows: 6 }}
               />
             )}
@@ -67,8 +65,7 @@ const WriteForm = Form.create()(
           <FormItem label="意见建议" {...FormCol}>
             {getFieldDecorator('suggestion')(
               <TextArea
-                placeholder="工作中发现的问题
-                            对工作室／部门的意见建议"
+                placeholder={"工作中发现的问题\n对工作室／部门的意见建议"}
                 autosize={{ minRows: 3, maxRows: 3 }}
               />
             )}

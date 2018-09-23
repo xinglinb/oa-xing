@@ -48,10 +48,6 @@ export default {
       { key: '0', text: '吐槽' },
       { key: '1', text: 'Bug' },
       { key: '2', text: '脑洞大开' }],
-    meetingType: [
-      { key: '0', value: '全员大会', text: '全员大会' },
-      { key: '1', value: '部门例会', text: '部门例会' },
-      { key: '2', value: '其他', text: '其他' }],
     memberStatus: [
       { key: '0', text: '未知', value: '未知' },
       { key: '1', text: '正常', value: '正常' },
