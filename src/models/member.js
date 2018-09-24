@@ -58,7 +58,7 @@ export default {
 
   reducers: {
     setMemberData(state, { payload }) {
-      return { ...state, members: payload.members };
+      return { ...state, members: payload };
     },
     setFormData(state, { payload }) {
       return {

@@ -83,6 +83,7 @@ class RecruitManager extends React.Component {
           columns={columns}
           scroll={{ x: 1200 }}
           loading={this.props.loading}
+          rowKey='id'
         />
         <Drawer
           title={"应聘详情：" + this.props.actRecruit.name}

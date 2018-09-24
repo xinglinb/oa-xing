@@ -24,12 +24,8 @@ function Routes({ indexUrl, role }) {
   return (
     <Switch>
       <Route exact path={`${indexUrl}`} component={Home} />
-      {
-        role > 0 && [
-          <Route key={0} path={`${indexUrl}member`} component={Member} />,
-          <Route key={1} path={`${indexUrl}feedback`} component={FeedBack} />
-        ]
-      }
+      <Route path={`${indexUrl}member`} component={Member} />
+      <Route path={`${indexUrl}feedback`} component={FeedBack} />
       <Route path={`${indexUrl}report`} component={Report} />
       <Route path={`${indexUrl}setting`} component={Setting} />
       <Route path={`${indexUrl}404`} component={NotFoundPage} />

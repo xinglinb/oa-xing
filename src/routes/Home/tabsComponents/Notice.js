@@ -9,16 +9,15 @@ class Notice extends React.Component {
     loading: false
   }
   componentDidMount() {
-    this.setState({ loading: true })
     this.props.dispatch({
       type: 'home/announce'
-    }).finally(() => {
-      this.setState({ loading: false })
+    }).catch(e => {
+      console.log(e);
     })
   }
   render() {
     return (
-      <Spin spinning={this.state.loading}>
+      <Spin spinning={this.props.loading}>
         <Collapse bordered={false}>
           {
             this.props.announces.map(item => (
@@ -38,5 +37,6 @@ class Notice extends React.Component {
 }
 
 export default connect(({ home }) => ({
-  announces: home.announces
+  announces: home.announces,
+  loading: home.loading
 }))(Notice);

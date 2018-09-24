@@ -32,6 +32,8 @@ class Nav extends React.Component {
             this.refs.suggestFromRef.resetFields()
             this.setState({ visible: false })
           }
+        }).catch(e => {
+          console.log(e);
         }).finally(() => {
           this.setState({ submitLodaing: false })
         })
@@ -40,12 +42,13 @@ class Nav extends React.Component {
   }
   render() {
     const { nav, actMenu, user } = this.props
+    const role = user.role || 0
     return (
-      <div style={{ height: '100%', position: "relative", minHeight: 450 }}>
+      <div style={{ height: '100%', position: "relative", minHeight: 450, paddingTop: 10 }}>
         <div className={styles.logos} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[actMenu]}>
           {
-            nav.filter(item => item.role <= user.role)
+            nav.filter(item => item.role <= role)
               .map(item => (
                 <Menu.Item key={item.url}>
                   <Link to={item.url}>

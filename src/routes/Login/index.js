@@ -33,6 +33,9 @@ class Login extends React.Component {
                 } else {
                   this.setState({ loginLoading: false })
                 }
+              }).catch(e => {
+                this.setState({ loginLoading: false })
+                console.log(e);
               })
             }
           });

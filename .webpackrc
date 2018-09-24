@@ -4,7 +4,7 @@
   ],
   "proxy": {
     "/api": {
-      "target": "http://snwvgz.natappfree.cc/",
+      "target": "http://93kxs4.natappfree.cc/",
       "changeOrigin": true
     }
   }

@@ -5,7 +5,8 @@ export default {
   namespace: 'home',
 
   state: {
-    announces: []
+    announces: [],
+    loading: false
   },
 
   subscriptions: {
@@ -15,10 +16,12 @@ export default {
 
   effects: {
     *announce({ payload }, { call, put }) {
+      yield put({ type: 'showLoading' })
       let res = yield call(home.announce);
       if (res.success) {
         yield put({ type: 'getData', payload: res.data })
       }
+      yield put({ type: 'hideLoading' })
       return res
     },
     *sendAnnounce({ payload }, { call, put }) {
@@ -33,6 +36,12 @@ export default {
   reducers: {
     getData(state, { payload }) {
       return { ...state, announces: payload };
+    },
+    showLoading(state) {
+      return { ...state, loading: true };
+    },
+    hideLoading(state) {
+      return { ...state, loading: false };
     },
   },
 

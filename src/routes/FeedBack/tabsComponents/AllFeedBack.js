@@ -36,6 +36,7 @@ class AllFeedBack extends React.Component {
       <div>
         <Table
           dataSource={this.props.feedbacks}
+          rowKey='time'
           columns={columns}
           scroll={{ x: 900 }}
           loading={this.props.loading}

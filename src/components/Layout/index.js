@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './layout.less';
-import { Layout, Menu, Icon, Avatar, Dropdown, Modal } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown, Modal, Drawer } from 'antd';
 import { connect } from 'dva';
 import Nav from "./components/Nav";
 import Routes from "./components/Routes";
@@ -12,6 +12,9 @@ const { Header, Content, Footer, Sider } = Layout;
 class MyLayout extends React.Component {
   componentDidMount() {
     this.props.dispatch({ type: 'login/getUser' })
+      .catch(e => {
+        console.log(e);
+      })
   }
   state = {
     collapsed: false
@@ -30,19 +33,37 @@ class MyLayout extends React.Component {
     const { props } = this
     return (
       <Layout style={{ height: '100%' }}>
-        <Sider
-          breakpoint="lg"
-          collapsible={true}
-          collapsedWidth="0"
-          collapsed={this.state.collapsed}
-          trigger={null}
-          onBreakpoint={this.autoToggle}
-          width={100}
-          style={{ overflow: 'hidden' }}
-        >
+        {
+          document.body.clientWidth > 992 && <Sider
+            breakpoint="lg"
+            collapsible={true}
+            collapsedWidth="0"
+            collapsed={this.state.collapsed}
+            trigger={null}
+            onBreakpoint={this.autoToggle}
+            width={100}
+            style={{ overflow: 'hidden' }}
+          >
+            <Nav actMenu={this.props.location.pathname} />
+          </Sider>
+        }
+        {
+          document.body.clientWidth <= 992 && <Drawer
+            placement='left'
+            closable={false}
+            onClose={() => { this.autoToggle(false) }}
+            visible={this.state.collapsed}
+            width={100}
+            style={{
+              backgroundColor: '#001529',
+              padding: 0,
+              height: '100%',
+            }}
+          >
+            <Nav actMenu={this.props.location.pathname} />
+          </Drawer>
+        }
 
-          <Nav actMenu={this.props.location.pathname} />
-        </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} >
             <Icon
@@ -85,14 +106,17 @@ class MyLayout extends React.Component {
               </Avatar>
             </Dropdown>
           </Header>
-          <Content style={{ marginTop: 10 }}>
-            <div style={{ background: '#fff' }}>
-              <Routes indexUrl={this.props.match.url} role={this.props.user.role} />
-            </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            OA ©2018 Created by 明理院
-      </Footer>
+          <div style={{ maxHeight: document.body.clientHeight - 64, overflow: 'auto' }}>
+            <Content style={{ marginTop: 10, }}>
+              <div style={{ background: '#fff' }}>
+                <Routes indexUrl={this.props.match.url} role={this.props.user.role} />
+              </div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+              OA ©2018 Created by 明理院
+            </Footer>
+          </div>
+
         </Layout>
       </Layout>
     );
