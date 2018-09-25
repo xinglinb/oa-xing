@@ -28,7 +28,7 @@ export default {
       let params = yield select(state => state.member.searchFrom);
       let res = yield call(member.member, params);
       if (res.success) {
-        yield put({ type: 'setMemberData', payload: res.data })
+        yield put({ type: 'setMemberData', payload: res.data.members })
       }
       yield put({ type: 'hideLoading' })
       return res

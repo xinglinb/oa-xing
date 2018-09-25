@@ -66,7 +66,7 @@ class MemberManager extends React.Component {
           columns={columns}
           scroll={{ x: 780 }}
           loading={this.props.loading}
-          rowKey='id'
+          rowKey='key'
         />
         <Drawer
           title={"成员信息：" + this.props.actMember.name}
